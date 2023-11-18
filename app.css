@@ -1,0 +1,92 @@
+.select2-container--default .select2-selection--multiple {
+  padding-bottom: 10px !important;
+  padding-left: 5px !important;
+  border-radius: 0.5em !important;
+}
+
+.select2-container--default
+  .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: #774dd3;
+  color: white;
+}
+
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice {
+  background-color: #55a6f8 !important;
+  border-color: #55a6f8 !important;
+}
+
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice__display {
+  color: white !important;
+}
+
+.select2-search__field {
+    height: 20px !important;
+}
+
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice__remove {
+  color: white;
+}
+
+ /* Search Bar CSS */
+ .container-search {
+   padding: 0px;
+   position: relative;
+   font-size: 16px;
+   background-color: #ffffff;
+ }
+
+ .container-search input {
+   width: 100%;
+   border: 1px #000;
+   display: block;
+   padding-left: 25px;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   padding-left: 50px;
+ }
+
+ .container-search input:focus {
+   outline: none;
+ }
+
+ .container-search input::placeholder {
+   /*color: #627D98;*/
+   color: #9FB3C8;
+ }
+
+ .container-search .svg {
+   color: #627D98;
+   height: 16px;
+   width: 16px;
+   position: absolute;
+   margin-top: 20px;
+   margin-left: 20px;
+ }
+
+ /* Search header divider */
+
+ .search-divider {
+   border-bottom: 1px solid #9FB3C8;
+   width: 100%;
+ }
+
+
+ /* Data table styles */
+
+ .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+  padding: 1.5rem;
+ }
+
+ table.dataTable {
+  border: transparent !important;
+ }
+
+ .dataTable tr {
+  border: transparent;
+ }

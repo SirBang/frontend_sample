@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/img/apple-icon.png">
+    <title>
+      ContractHound App
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <!-- Select 2 Files -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="ch-ui.css" rel="stylesheet" />
+    <link id="pagestyle" href="app.css" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body class="g-sidenav-show bg-gray-100"
+        x-data="{ adminActive: false }"
+        >
+
+
+        <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start" id="sidenav-main">
+
+
+
+          <div class="sidenav-header" id="sidenav-header-logo">
+            <a class="navbar-brand d-flex align-items-center m-0 mt-5"
+               href="/"
+               >
+               <svg width="189" height="86" viewBox="0 0 202 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M12.3307 10.5372C12.2186 10.6493 12.1065 10.7614 11.9945 10.8735C11.8824 10.9856 11.7703 10.9856 11.5461 10.9856C11.3219 10.9856 11.0977 10.8735 10.9856 10.7614C10.7614 10.6493 10.5372 10.5372 10.313 10.313C10.0888 10.2009 9.7525 9.97669 9.4162 9.86459C9.07991 9.75249 8.63152 9.64039 8.07103 9.64039C7.39845 9.64039 6.83796 9.75249 6.27747 9.97669C5.71698 10.2009 5.38069 10.5372 5.04439 10.9856C4.7081 11.434 4.48391 11.9944 4.25971 12.667C4.14761 13.3396 4.03552 14.0122 4.03552 14.909C4.03552 15.8058 4.14761 16.4784 4.25971 17.1509C4.48391 17.8235 4.7081 18.384 5.04439 18.8324C5.38069 19.2808 5.82908 19.6171 6.27747 19.8413C6.72586 20.0655 7.28635 20.1776 7.95893 20.1776C8.63152 20.1776 9.07991 20.0655 9.4162 19.9534C9.7525 19.8413 10.0888 19.6171 10.4251 19.505C10.6493 19.2808 10.8735 19.1687 11.0977 19.0566C11.3219 18.9445 11.5461 18.8324 11.7703 18.8324C12.1065 18.8324 12.3307 18.9445 12.4428 19.1687L13.5638 20.626C13.1154 21.0744 12.667 21.5227 12.2186 21.859C11.7703 22.1953 11.2098 22.4195 10.6493 22.6437C10.0888 22.8679 9.5283 22.98 8.96781 23.0921C8.40732 23.2042 7.84684 23.2042 7.28635 23.2042C6.27747 23.2042 5.38069 22.98 4.48391 22.6437C3.58713 22.3074 2.80244 21.7469 2.12986 21.0744C1.45727 20.4018 0.896781 19.505 0.560488 18.4961C0.224195 17.4872 0 16.2542 0 15.0211C0 13.788 0.224195 12.7791 0.560488 11.7703C0.896781 10.7614 1.34517 9.86459 2.01776 9.192C2.69034 8.40732 3.47503 7.84683 4.48391 7.51054C5.49279 7.06215 6.61376 6.83795 7.84684 6.83795C9.07991 6.83795 10.0888 7.06215 10.9856 7.39844C11.8824 7.73473 12.667 8.29522 13.4517 9.07991L12.3307 10.5372Z"
+                                           fill="white"></path>
+                 <path
+                     d="M22.7559 6.83795C23.989 6.83795 24.9978 7.06215 26.0067 7.39844C27.0156 7.73473 27.8003 8.29522 28.4729 9.07991C29.1455 9.86459 29.706 10.6493 30.0422 11.6582C30.3785 12.667 30.6027 13.788 30.6027 15.1332C30.6027 16.3663 30.3785 17.5993 30.0422 18.6082C29.706 19.6171 29.1455 20.5139 28.4729 21.1865C27.8003 21.859 26.9035 22.4195 26.0067 22.8679C24.9978 23.2042 23.989 23.4284 22.7559 23.4284C21.5228 23.4284 20.5139 23.2042 19.5051 22.8679C18.4962 22.5316 17.7115 21.9711 17.0389 21.1865C16.3663 20.5139 15.8058 19.6171 15.4695 18.6082C15.1333 17.5993 14.9091 16.4784 14.9091 15.1332C14.9091 13.9001 15.1333 12.667 15.4695 11.6582C15.8058 10.6493 16.3663 9.75249 17.0389 9.07991C17.7115 8.40732 18.6083 7.84683 19.5051 7.39844C20.5139 7.06215 21.5228 6.83795 22.7559 6.83795ZM22.7559 20.5139C24.1011 20.5139 25.1099 20.0655 25.7825 19.1687C26.4551 18.2719 26.7914 16.9267 26.7914 15.2453C26.7914 13.5638 26.4551 12.2186 25.7825 11.3219C25.1099 10.4251 24.1011 9.97669 22.7559 9.97669C21.4107 9.97669 20.4018 10.4251 19.7293 11.3219C19.0567 12.2186 18.7204 13.5638 18.7204 15.2453C18.7204 16.9267 19.0567 18.2719 19.7293 19.1687C20.4018 20.0655 21.4107 20.5139 22.7559 20.5139Z"
+                     fill="white"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M33.6294 23.2042V7.17427H35.9834C36.4318 7.17427 36.7681 7.39846 36.9923 7.84685L37.2165 9.07993C37.5528 8.74364 37.8891 8.40734 38.2254 8.18315C38.5617 7.95895 39.0101 7.62266 39.3464 7.51056C39.7948 7.28637 40.1311 7.17427 40.6915 7.06217C41.1399 6.95007 41.7004 6.95007 42.1488 6.95007C43.0456 6.95007 43.8303 7.06217 44.5029 7.39846C45.1755 7.73476 45.7359 8.07105 46.1843 8.63154C46.6327 9.19203 46.969 9.86461 47.1932 10.5372C47.4174 11.3219 47.5295 12.1066 47.5295 13.0033V23.2042H43.6061V13.0033C43.6061 11.9945 43.3819 11.2098 42.9335 10.7614C42.4851 10.313 41.8125 9.97671 40.9157 9.97671C40.2432 9.97671 39.5706 10.0888 39.0101 10.4251C38.4496 10.7614 37.8891 11.0977 37.3286 11.6582V23.3163H33.6294V23.2042Z"
+                                           fill="white"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M56.4973 23.5405C55.04 23.5405 54.0311 23.0921 53.2464 22.3074C52.4617 21.5227 52.1255 20.4018 52.1255 19.0566V10.0888H50.444C50.2198 10.0888 50.1077 9.97668 49.8835 9.86459C49.6593 9.75249 49.6593 9.52829 49.6593 9.3041V7.73473L52.2375 7.28634L53.0222 2.91453C53.0222 2.69033 53.1343 2.57824 53.3585 2.46614C53.4706 2.35404 53.6948 2.24194 53.919 2.24194H55.9368V7.28634H60.1965V10.0888H56.0489V18.8324C56.0489 19.2808 56.161 19.7292 56.3852 19.9534C56.6094 20.2897 56.9457 20.4018 57.394 20.4018C57.6182 20.4018 57.8424 20.4018 57.9545 20.2897C58.0666 20.1776 58.2908 20.1776 58.4029 20.0655C58.515 19.9534 58.6271 19.9534 58.7392 19.8413C58.8513 19.7292 58.9634 19.7292 59.0755 19.7292C59.1876 19.7292 59.2997 19.7292 59.4118 19.8413C59.5239 19.9534 59.5239 19.9534 59.636 20.0655L60.757 21.9711C60.1965 22.4195 59.5239 22.7558 58.8513 23.0921C58.0666 23.3163 57.2819 23.5405 56.4973 23.5405Z"
+                                           fill="white"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M62.7749 23.2042V7.17427H65.0169C65.4652 7.17427 65.6894 7.28637 65.8015 7.39846C65.9136 7.51056 66.0257 7.84685 66.1378 8.18315L66.362 9.97671C66.9225 8.96783 67.483 8.29525 68.1556 7.73476C68.8282 7.17427 69.6129 6.95007 70.6217 6.95007C71.4064 6.95007 71.9669 7.06217 72.4153 7.39846L72.1911 10.313C72.1911 10.5372 72.079 10.6493 71.9669 10.7614C71.8548 10.8735 71.7427 10.8735 71.5185 10.8735C71.4064 10.8735 71.1822 10.8735 70.8459 10.7614C70.5096 10.7614 70.2854 10.6493 69.9492 10.6493C69.5008 10.6493 69.1645 10.7614 68.8282 10.8735C68.4919 10.9856 68.1556 11.2098 67.9314 11.434C67.7072 11.6582 67.483 11.9945 67.2588 12.3308C67.0346 12.6671 66.8104 13.0033 66.6983 13.4517V23.3163H62.7749V23.2042Z"
+                                           fill="white"></path>
+                 <path
+                     d="M84.8579 23.2042C84.5216 23.2042 84.1853 23.2042 83.9611 23.0921C83.7369 22.98 83.6248 22.7558 83.5127 22.4196L83.1764 21.2986C82.728 21.6349 82.3918 21.9712 81.9434 22.3075C81.6071 22.5317 81.1587 22.8679 80.7103 22.98C80.2619 23.2042 79.8135 23.3163 79.3651 23.4284C78.9167 23.5405 78.3562 23.5405 77.7958 23.5405C77.1232 23.5405 76.4506 23.4284 75.8901 23.3163C75.3296 23.0921 74.7691 22.8679 74.4328 22.5317C73.9844 22.1954 73.6481 21.747 73.4239 21.1865C73.1997 20.626 73.0876 19.9534 73.0876 19.2808C73.0876 18.7203 73.1997 18.0477 73.536 17.4873C73.8723 16.9268 74.4328 16.3663 75.1054 15.9179C75.8901 15.4695 76.7869 15.0211 78.0199 14.6848C79.253 14.3485 80.8224 14.2364 82.6159 14.1243V13.2275C82.6159 12.1066 82.3918 11.3219 81.9434 10.8735C81.495 10.313 80.8224 10.0888 79.9256 10.0888C79.253 10.0888 78.8046 10.2009 78.3562 10.313C77.9079 10.4251 77.5716 10.6493 77.2353 10.7614C76.899 10.8735 76.6748 11.0977 76.3385 11.2098C76.1143 11.3219 75.778 11.434 75.4417 11.434C75.2175 11.434 74.9933 11.3219 74.7691 11.2098C74.5449 11.0977 74.4328 10.8735 74.3207 10.7614L73.6481 9.52832C75.5538 7.84686 77.6837 6.95007 80.374 6.95007C81.2708 6.95007 82.1676 7.06217 82.9522 7.39846C83.7369 7.73476 84.2974 8.18315 84.8579 8.63154C85.4184 9.19203 85.7547 9.86461 85.9789 10.6493C86.2031 11.434 86.4273 12.2187 86.4273 13.1154V23.3163H84.8579V23.2042ZM79.0288 20.8502C79.8135 20.8502 80.4861 20.7381 81.0466 20.4018C81.6071 20.0655 82.1676 19.7292 82.7281 19.0566V16.3663C81.6071 16.3663 80.5982 16.4784 79.9256 16.7026C79.253 16.9268 78.5804 17.0389 78.132 17.2631C77.6837 17.4873 77.3474 17.7115 77.1232 18.0477C76.899 18.384 76.7869 18.6082 76.7869 19.0566C76.7869 19.7292 77.0111 20.1776 77.3474 20.5139C77.6837 20.8502 78.4683 20.8502 79.0288 20.8502Z"
+                     fill="white"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M101.784 10.5372C101.672 10.6493 101.56 10.7614 101.448 10.8735C101.336 10.9856 101.224 10.9856 101 10.9856C100.776 10.9856 100.663 10.8735 100.439 10.7614C100.215 10.6493 99.9909 10.5372 99.7667 10.313C99.5425 10.2009 99.2062 9.97669 98.8699 9.86459C98.5336 9.75249 98.0853 9.64039 97.5248 9.64039C96.8522 9.64039 96.2917 9.75249 95.7312 9.97669C95.1707 10.2009 94.8344 10.5372 94.4981 10.9856C94.1618 11.434 93.9376 11.9944 93.7134 12.667C93.6013 13.3396 93.4893 14.0122 93.4893 14.909C93.4893 15.8058 93.6013 16.4784 93.7134 17.1509C93.9376 17.8235 94.1618 18.384 94.4981 18.8324C94.8344 19.2808 95.2828 19.6171 95.7312 19.8413C96.1796 20.0655 96.7401 20.1776 97.4127 20.1776C98.0853 20.1776 98.5336 20.0655 98.8699 19.9534C99.2062 19.8413 99.5425 19.6171 99.8788 19.505C100.103 19.2808 100.327 19.1687 100.551 19.0566C100.776 18.9445 101 18.8324 101.224 18.8324C101.56 18.8324 101.784 18.9445 101.897 19.1687L103.018 20.626C102.569 21.0744 102.121 21.5227 101.672 21.859C101.224 22.1953 100.664 22.4195 100.103 22.6437C99.5425 22.8679 98.982 22.98 98.4215 23.0921C97.8611 23.2042 97.3006 23.2042 96.7401 23.2042C95.7312 23.2042 94.8344 22.98 93.9376 22.6437C93.0409 22.3074 92.2562 21.7469 91.5836 21.0744C90.911 20.4018 90.3505 19.505 90.0142 18.4961C89.6779 17.4872 89.4537 16.2542 89.4537 15.0211C89.4537 13.788 89.6779 12.7791 90.0142 11.7703C90.3505 10.7614 90.7989 9.86459 91.4715 9.192C92.1441 8.40732 92.9288 7.84683 93.9376 7.51054C94.9465 7.06215 96.0675 6.83795 97.3006 6.83795C98.5336 6.83795 99.5425 7.06215 100.439 7.39844C101.336 7.73473 102.121 8.29522 102.905 9.07991L101.784 10.5372Z"
+                                           fill="white"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M110.753 23.5405C109.295 23.5405 108.286 23.0921 107.502 22.3074C106.717 21.5227 106.381 20.4018 106.381 19.0566V10.0888H104.699C104.475 10.0888 104.363 9.97668 104.139 9.86459C103.915 9.75249 103.915 9.52829 103.915 9.3041V7.73473L106.493 7.28634L107.277 2.91453C107.277 2.69033 107.39 2.57824 107.614 2.46614C107.726 2.35404 107.95 2.24194 108.174 2.24194H110.192V7.28634H114.452V10.0888H110.192V18.8324C110.192 19.2808 110.304 19.7292 110.528 19.9534C110.753 20.2897 111.089 20.4018 111.537 20.4018C111.761 20.4018 111.986 20.4018 112.098 20.2897C112.21 20.1776 112.434 20.1776 112.546 20.0655C112.658 19.9534 112.77 19.9534 112.882 19.8413C112.994 19.7292 113.107 19.7292 113.219 19.7292C113.331 19.7292 113.443 19.7292 113.555 19.8413C113.667 19.9534 113.667 19.9534 113.779 20.0655L114.9 21.9711C114.34 22.4195 113.667 22.7558 112.994 23.0921C112.322 23.3163 111.537 23.5405 110.753 23.5405Z"
+                                           fill="white"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M118.599 23.2042V0.112061H121.402V9.41617C122.074 8.74358 122.859 8.071 123.644 7.7347C124.428 7.28631 125.437 7.06212 126.446 7.06212C127.343 7.06212 128.128 7.17421 128.8 7.51051C129.473 7.8468 130.033 8.18309 130.482 8.74358C130.93 9.30407 131.266 9.86456 131.491 10.6492C131.715 11.4339 131.827 12.2186 131.827 13.1154V23.2042H129.024V13.1154C129.024 11.8823 128.8 10.9855 128.24 10.313C127.679 9.64036 126.895 9.30407 125.774 9.30407C124.989 9.30407 124.204 9.52827 123.42 9.86456C122.747 10.3129 122.074 10.7613 121.402 11.4339V23.0921H118.599V23.2042Z"
+                                           class="fill-success"></path>
+                 <path
+                     d="M142.812 7.06213C143.933 7.06213 145.054 7.28633 145.951 7.62262C146.848 7.95892 147.633 8.5194 148.305 9.30409C148.978 10.0888 149.426 10.8735 149.875 11.8823C150.211 12.8912 150.435 14.0122 150.435 15.2453C150.435 16.4783 150.211 17.5993 149.875 18.6082C149.538 19.6171 148.978 20.5139 148.305 21.1864C147.633 21.859 146.848 22.4195 145.951 22.8679C145.054 23.2042 143.933 23.4284 142.812 23.4284C141.691 23.4284 140.571 23.2042 139.674 22.8679C138.777 22.5316 137.992 21.9711 137.32 21.1864C136.647 20.5139 136.199 19.6171 135.75 18.6082C135.414 17.5993 135.19 16.4783 135.19 15.2453C135.19 14.0122 135.414 12.8912 135.75 11.8823C136.087 10.8735 136.647 9.97667 137.32 9.30409C137.992 8.6315 138.777 8.07101 139.674 7.62262C140.571 7.28633 141.691 7.06213 142.812 7.06213ZM142.812 21.2985C144.382 21.2985 145.503 20.7381 146.287 19.7292C147.072 18.7203 147.408 17.263 147.408 15.3574C147.408 13.4517 147.072 11.9944 146.287 10.9856C145.503 9.97667 144.382 9.41618 142.812 9.41618C142.028 9.41618 141.355 9.52828 140.683 9.86458C140.122 10.0888 139.562 10.5372 139.225 10.9856C138.777 11.546 138.553 12.1065 138.329 12.8912C138.104 13.6759 137.992 14.4606 137.992 15.4695C137.992 17.3751 138.329 18.8324 139.113 19.8413C140.01 20.7381 141.243 21.2985 142.812 21.2985Z"
+                     class="fill-success"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M156.601 7.39838V17.4872C156.601 18.7202 156.825 19.617 157.386 20.2896C157.946 20.9622 158.731 21.2985 159.852 21.2985C160.636 21.2985 161.421 21.0743 162.206 20.738C162.878 20.4017 163.551 19.8412 164.224 19.1686V7.39838H167.026V23.3162H165.345C164.896 23.3162 164.672 23.0921 164.56 22.7558L164.336 21.0743C163.663 21.859 162.878 22.4195 161.982 22.8679C161.085 23.3162 160.188 23.5404 159.067 23.5404C158.17 23.5404 157.386 23.4283 156.713 23.0921C156.04 22.7558 155.48 22.4195 155.032 21.859C154.583 21.2985 154.247 20.738 154.023 19.9533C153.798 19.1686 153.686 18.3839 153.686 17.4872V7.39838H156.601Z"
+                                           class="fill-success"></path>
+                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                           d="M171.397 23.2042V7.39843H173.079C173.527 7.39843 173.752 7.62262 173.864 7.95891L174.088 9.64038C174.76 8.8557 175.545 8.29521 176.442 7.73472C177.339 7.28633 178.235 7.06213 179.356 7.06213C180.253 7.06213 181.038 7.17423 181.71 7.51052C182.383 7.84682 182.944 8.18311 183.392 8.7436C183.84 9.30409 184.177 9.86458 184.401 10.6493C184.625 11.4339 184.737 12.2186 184.737 13.1154V23.2042H181.935V13.1154C181.935 11.8823 181.71 10.9856 181.15 10.313C180.589 9.64038 179.805 9.30409 178.684 9.30409C177.899 9.30409 177.114 9.52828 176.33 9.86458C175.657 10.313 174.985 10.7614 174.312 11.4339V23.0921H171.397V23.2042Z"
+                                           class="fill-success"></path>
+                 <path
+                     d="M200.43 23.2042C199.982 23.2042 199.758 22.98 199.646 22.6437L199.422 20.7381C198.749 21.5228 197.964 22.1953 197.067 22.7558C196.171 23.3163 195.162 23.5405 194.041 23.5405C193.144 23.5405 192.359 23.3163 191.575 22.98C190.79 22.6437 190.23 22.0832 189.669 21.4107C189.109 20.7381 188.772 19.8413 188.436 18.8324C188.1 17.8235 187.988 16.7026 187.988 15.3574C187.988 14.2364 188.1 13.1154 188.436 12.1065C188.772 11.0977 189.221 10.2009 189.781 9.5283C190.342 8.74362 191.126 8.18313 191.911 7.73474C192.696 7.28635 193.705 7.06215 194.826 7.06215C195.834 7.06215 196.619 7.17425 197.292 7.51054C197.964 7.84684 198.637 8.29523 199.197 8.85572V0H202V23.0921H200.43V23.2042ZM195.05 21.1865C195.946 21.1865 196.731 20.9623 197.404 20.5139C198.076 20.0655 198.749 19.505 199.309 18.7203V11.0977C198.749 10.4251 198.188 9.8646 197.628 9.6404C197.067 9.30411 196.395 9.19201 195.61 9.19201C194.153 9.19201 193.032 9.7525 192.247 10.7614C191.463 11.7703 191.014 13.3396 191.014 15.2453C191.014 16.2542 191.126 17.1509 191.238 17.9356C191.463 18.7203 191.687 19.2808 192.023 19.7292C192.359 20.1776 192.808 20.5139 193.256 20.7381C193.817 21.0744 194.377 21.1865 195.05 21.1865Z"
+                     class="fill-success"></path>
+                 <path
+                     d="M92.9828 46L99.2717 57.5847C99.0234 59.8189 94.3068 64.1218 88.7627 59.9016V50.1374L92.9828 46ZM92.9828 46H99.1889L101.009 48.4824H106.222C106.222 48.4824 106.222 50.8821 106.222 51.5441C106.222 55.9297 99.0234 52.7853 99.0234 59.3224C99.0234 61.4738 100.43 64.4528 101.175 66.1905M101.175 66.1905L106.305 67.5972C106.305 67.5972 108.705 68.3419 109.036 71.4036C109.863 78.1889 109.698 76.7822 110.443 80.3404C108.126 80.3404 106.471 79.0991 106.305 77.9407C105.726 74.7963 105.561 72.7276 105.561 72.7276H101.754M101.175 66.1905C101.423 66.687 101.506 67.1007 101.589 67.3489M101.175 66.1905C101.34 66.687 101.506 67.018 101.589 67.3489M101.754 72.7276C102.002 71.1553 102.002 69.3349 101.589 67.3489M101.754 72.7276C102.085 71.1553 102.085 69.3349 101.589 67.3489M101.754 72.7276C100.927 77.3614 97.6995 80.0094 97.6995 80.0094L99.6854 87.1257C99.6854 87.1257 100.265 87.1257 100.761 87.1257C104.154 87.1257 104.237 90.8493 104.237 90.8493H102.913H98.4442L95.7963 88.0359C95.7963 88.0359 88.5972 74.6308 88.5972 70.6589C88.5972 68.2592 90.5004 66.356 92.9001 66.356C95.2998 66.356 97.203 68.2592 97.203 70.6589C97.203 74.9617 88.349 87.1257 88.349 87.1257H89.3419C90.2522 87.1257 92.4863 88.1187 92.4863 90.8493H73.7853C72.0476 90.6838 67 88.8634 67 84.8087C67 88.8634 72.0476 90.6838 73.7853 90.6838H86.1975C86.1975 87.9532 84.0461 86.9602 83.0531 86.9602C81.7291 86.9602 80.1569 86.9602 80.1569 86.9602C80.1569 86.9602 82.7221 85.719 84.6253 84.726C85.6183 84.2295 87.4387 83.3193 87.4387 81.2506C87.4387 78.9336 85.701 77.8579 83.7978 77.8579H78.5847H83.9633C85.8665 77.8579 87.6042 78.9336 87.6042 81.2506C87.6042 83.3193 85.8665 84.2295 84.7908 84.726C82.8048 85.719 80.2397 86.9602 80.2397 86.9602C80.2397 86.9602 81.7291 86.9602 83.1358 86.9602C84.0461 86.9602 86.2803 87.9532 86.2803 90.6838H75.854C74.861 90.6838 74.0336 89.8564 74.0336 88.8634C74.0336 87.7877 74.861 86.9602 75.854 86.9602C75.854 86.9602 73.1233 84.8087 73.1233 81.7471C73.1233 79.4301 74.0336 78.0234 74.6956 77.1959C78.502 72.3966 88.8454 60.7291 88.8454 60.7291V59.8189"
+                     stroke="white" stroke-width="1.36842"></path>
+               </svg>
+            </a>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- Navbar contents -->
+          <div class="collapse navbar-collapse px-3 w-auto h-auto pt-5 mb-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+              <!-- Folders item -->
+              <li class="nav-item mt-5">
+                <a href="/home/" class="nav-link text-white  opacity-10"
+                                 aria-controls="foldersHome" role="button" aria-expanded="true">
+                  <div
+                      class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center">
+                    <svg width="16px" height="16px" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M3 4C3 3.44772 3.44772 3 4 3H16C16.5523 3 17 3.44772 17 4V6C17 6.55228 16.5523 7 16 7H4C3.44772 7 3 6.55228 3 6V4Z"
+                          class="color-background" />
+                      <path
+                          d="M3 10C3 9.44771 3.44772 9 4 9H10C10.5523 9 11 9.44771 11 10V16C11 16.5523 10.5523 17 10 17H4C3.44772 17 3 16.5523 3 16V10Z"
+                          class="color-background" />
+                      <path
+                          d="M14 9C13.4477 9 13 9.44771 13 10V16C13 16.5523 13.4477 17 14 17H16C16.5523 17 17 16.5523 17 16V10C17 9.44771 16.5523 9 16 9H14Z"
+                          class="color-background" />
+                    </svg>
+                  </div>
+                  <span class="nav-link-text ms-2">Folders</span>
+                </a>
+              </li>
+
+              <!-- Contracts -->
+              <li class="nav-item">
+                <a href="/contracts/" class="nav-link text-white  opacity-10"
+                                      aria-controls="foldersHome" role="button" aria-expanded="true">
+                  <div
+                      class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center">
+                    <svg width="16px" height="16px" viewBox="0 0 24 24" version="1.1" stroke-width="1.5" stroke="currentColor"
+                                                                                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                      <path class="color-background" stroke-linecap="round" stroke-linejoin="round"
+                                                                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                  </div>
+                  <span class="nav-link-text ms-2">Contracts</span>
+                </a>
+              </li>
+
+              <!-- Calendar -->
+              <li class="nav-item">
+                <a href="/contracts/calendar/" class="nav-link text-white  opacity-10"
+                                               aria-controls="foldersHome" role="button" aria-expanded="true">
+                  <div
+                      class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                                                            stroke="currentColor" width="16px" height="16px">
+                      <path class="color-background" stroke-linecap="round" stroke-linejoin="round"
+                                                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                    </svg>
+
+                  </div>
+                  <span class="nav-link-text ms-2">Calendar</span>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link text-white opacity-9" :class="adminActive ? 'active' : ''" aria-controls="componentsExamples" role="button" aria-expanded="false" id='nav-admin-a'>
+                  <div class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center">
+                    <svg width="16px" height="16px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <title>customer-support</title>
+                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                      <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(1.000000, 0.000000)">
+                      <path class="color-background" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z" opacity="0.59858631"></path>
+                      <path class="color-foreground" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                      <path class="color-foreground" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                      </g>
+                      </g>
+                      </g>
+                      </g>
+                    </svg>
+                  </div>
+                  <span class="nav-link-text ms-2">Admin</span>
+                </a>
+
+
+                <div class="collapse" id="componentsExamples">
+
+                  <ul class="nav border-start ms-4">
+                    <li class="nav-item ">
+
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/accounts/users/">
+                        <span class="sidenav-mini-icon"> U </span>
+                        <span class="sidenav-normal"> Users </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/templates/">
+                        <span class="sidenav-mini-icon"> T </span>
+                        <span class="sidenav-normal"> Templates </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/billing/info/">
+                        <span class="sidenav-mini-icon"> B </span>
+                        <span class="sidenav-normal"> Billing </span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/accounts/audit/">
+                        <span class="sidenav-mini-icon"> A </span>
+                        <span class="sidenav-normal"> Audit logs </span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/workflows/">
+                        <span class="sidenav-mini-icon"> W </span>
+                        <span class="sidenav-normal"> Workflows </span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/contract-status/">
+                        <span class="sidenav-mini-icon"> S </span>
+                        <span class="sidenav-normal"> Contract Status </span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item ">
+                      <a class="nav-link text-white opacity-9 "
+                         href="/accounts/settings/">
+                        <span class="sidenav-mini-icon"> S </span>
+                        <span class="sidenav-normal"> Account Settings </span>
+                      </a>
+                    </li>
+
+                  </ul>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div id="navbar-bottom">
+
+
+            <hr class="horizontal"/>
+            <div class="nav-link ms-4">
+              <span class="d-block mb-2">
+                <span class="text-xl">3 </span>
+                of 100 contracts</span>
+              <div class="progress me-6 mb-3">
+                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                               style="width: 3.0%;"
+                                                               aria-value-now="3.0" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+              <a href="/billing/subscription/">
+                <button type="button" class="btn btn-sm btn-info opacity-8 pt-1 pb-1 ps-3 pe-3 mb-0">Upgrade</button>
+              </a>
+            </div>
+
+            <hr class="horizontal"/>
+            <!-- User logo and name -->
+            <div class="nav-link text-light">
+              <div id="navbar-user-profile" class="ps-4 w-auto justify-center align-items-center text-sm  d-flex">
+
+                <div class="avatar avatar-sm d-flex justify-content-center align-items-center me-2 bg-secondary"
+                     style="border-radius: 50%; width: 32px; height: 32px;">
+                  <span>PR</span>
+                </div>
+
+                Philip Reynolds
+              </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="nav-link ps-5">
+              <a class="nav-link text-light d-flex align-items-center text-xs p-0" href="/accounts/profile/">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20px" height="20px">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div class="ms-3">
+                  User Settings
+                </div>
+              </a>
+            </div>
+
+            <!-- Help -->
+            <div class="nav-link ps-5">
+              <!-- TODO Link up /help to something -->
+              <a class="nav-link text-light d-flex align-items-center text-xs p-0" href="/help">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20px" height="20px">
+                  <path stroke-linecap="round" stroke-linejoin="round" class="color-background"
+                                                                       d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                </svg>
+
+                <div class="ms-3">
+                  Help
+                </div>
+              </a>
+            </div>
+
+
+            <div class="nav-link ps-5">
+              <a class="nav-link text-light d-flex align-items-center text-xs p-0 pb-3" href="/accounts/logout">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20px" height="20px">
+                  <path stroke-linecap="round" stroke-linejoin="round" class="color-background"
+                                                                       d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                </svg>
+
+                <div class="ms-3">
+                  Logout
+                </div>
+              </a>
+            </div>
+
+          </div>
+          </div>
+        </aside>
+        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+          <!-- Header Search Bar -->
+          <div class="row g-0">
+            <div class="container-search position-relative">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                                  stroke-width="1.5" stroke="currentColor" class="svg">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+
+              <input type="text" id="search-input"
+                                 placeholder="Search Documents"
+                                 hx-post="/contracts/search/"
+                                 hx-trigger="keyup changed delay:500ms"
+                                 hx-target="#search-results"
+                                 name="search"
+                                 class="text-secondary"/>
+              <div class="col-12 bd-content search-divider"></div>
+              <div id="search-results" class="col-12 bd-content position-absolute
+                                              w-100 bg-white border
+                                              rounded shadow-sm overflow-auto"
+                                       style="z-index: 1000; max-height: 200px;"></div>
+            </div>
+          </div>
+          <!-- End Header Search Bar -->
+          <!-- 
+            !! START !!
+            Please only change what you need to from here down
+          -->
+          <!-- Page Title & Breadcrumbs -->
+          <div class="row m-3 mt-4 ms-5 fs-3">
+                <a class="opacity-7 p-0 breadcrumb-text text-black" href="/folders/2240/">
+                  <i class="fa-solid fa-house"></i>
+                  Home
+                </a>
+          </div>
+          <!-- End Page title and Breadcrumbs -->
+
+
+
+          <form method="POST">
+            <input type="hidden" name="csrfmiddlewaretoken" value="HIlaM8LKrPQUw1u3JrMPfddeuWqenIwyPaDkWH9pxh1sT8amoB1QTAfuqRhqJgMd">
+            <div class="bg-gray-100 main-content position-relative max-height-vh-100 h-100">
+              <div class="container py-3 my-3">
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="card border shadow-xs h-100">
+                      <div class="card-header pb-0 p-4 pt-5">
+                        <h4>
+                          <i class="fa-solid fa-gear me-2"></i>
+                          Change Permissions on 'Home' folder 
+                        </h4>
+                        <p class="mx-4 font-weight-semibold text-lg">
+                          <i class="fa-solid fa-circle-info fs-11"></i>
+                          <i> 
+                            Giving a user access to this folder will give them
+                            this access to all contracts and all sub-folders within this folder
+                          </i>
+                        </p>
+                        <div class="mx-md-3 mt-4">
+                          <h6 class="mb-0 font-weight-semibold text-lg">
+                            <i class="fa-solid fa-user me-1"></i>
+                            Owner permissions
+                          </h6>
+                          <p class="text-sm mb-1">
+                            Users added to this list will have complete access to the <i>Home </i>folder.</p>
+                          <div class="py-2 my-2 mb-">
+                            <div class="input-group">
+                              <select name="owners" class="permission-select form-control w-100" name="states[]" multiple="multiple">
+                                <option value="1">john.smith@example.com</option>
+                                <option value="2">sarah.jones@example.com</option>
+                                <option value="3">james.brown@example.com</option>
+                                <option value="4">linda.taylor@example.com</option>
+                                <option value="5">robert.wilson@example.com</option>
+                                <option value="6">jennifer.johnson@example.com</option>
+                                <option value="7">michael.miller@example.com</option>
+                                <option value="8">elizabeth.moore@example.com</option>
+                                <option value="9">william.davis@example.com</option>
+                                <option value="10">emily.williams@example.com</option>
+                              </select>
+                            </div>
+                          </div>
+                          <h6 class="mb-0 font-weight-semibold text-lg">
+                            <i class="fas fa-edit me-1"></i>
+                            Editor permissions
+                          </h6>
+                          <p class="text-sm mb-1">Users added to this list will be able to read, update and delete this folder and its contents.</p>
+                          <div class="py-2 my-2">
+                            <div class="input-group">
+                              <select name="editors" class="permission-select w-100" name="states[]" multiple="multiple">
+
+                                <option value="1">john.smith@example.com</option>
+                                <option value="2">sarah.jones@example.com</option>
+                                <option value="3">james.brown@example.com</option>
+                                <option value="4">linda.taylor@example.com</option>
+                                <option value="5">robert.wilson@example.com</option>
+                                <option value="6">jennifer.johnson@example.com</option>
+                                <option value="7">michael.miller@example.com</option>
+                                <option value="8">elizabeth.moore@example.com</option>
+                                <option value="9">william.davis@example.com</option>
+                                <option value="10">emily.williams@example.com</option>
+
+                              </select>
+                            </div>
+                          </div>
+
+                          <h6 class="mb-0 font-weight-semibold text-lg">
+                            <i class="fas fa-book-reader me-1"></i>
+                            Reader permissions
+                          </h6>
+                          
+                          <p class="text-sm mb-1">Users added to this list will only be able to read this folder and its content.</p>
+                          <div class="py-2 my-2">
+                            <div class="input-group">
+                              <select name="readers" class="permission-select w-100" 
+                                      name="states[]" multiple="multiple" allowClear="true">
+
+                                <option value="1">john.smith@example.com</option>
+                                <option value="2">sarah.jones@example.com</option>
+                                <option value="3">james.brown@example.com</option>
+                                <option value="4">linda.taylor@example.com</option>
+                                <option value="5">robert.wilson@example.com</option>
+                                <option value="6">jennifer.johnson@example.com</option>
+                                <option value="7">michael.miller@example.com</option>
+                                <option value="8">elizabeth.moore@example.com</option>
+                                <option value="9">william.davis@example.com</option>
+                                <option value="10">emily.williams@example.com</option>
+
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mb-3 text-end">
+                          <button class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>
+                            Save
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- 
+            !! END !!
+            Please do not change anything below this line
+          -->
+
+        </main>
+
+        <footer class="pt-5 pb-1 mt-auto footer">
+          <div class="container">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6">
+              </div>
+
+            </div>
+          </div>
+        </footer>
+
+        <!--   Core JS Files   -->
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/perfect-scrollbar.min.js"></script>
+        <script src="js/smooth-scrollbar.min.js"></script>
+        <script src="js/sweetalert.min.js"></script>
+        <script src="js/choices.min.js"></script>
+        <script src="js/fullcalendar.min.js"></script>
+
+        <!-- Kanban scripts -->
+        <script>
+          var win = navigator.platform.indexOf('Win') > -1;
+          if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+              damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+          }
+          if (document.querySelector('.datetimepicker')) {
+            flatpickr('.datetimepicker', {
+              allowInput: true
+            }); // flatpickr
+          }
+        </script>
+        <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="js/ch-ui.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+
+        <script>
+          $('.permission-select').select2({
+            placeholder: 'Please select users',
+            allowClear: true,
+          });
+        </script>
+
+  </body>
+</html>
+
